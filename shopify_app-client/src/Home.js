@@ -2,9 +2,8 @@ import React, { Component } from "react";
 
 class Home extends Component {
     state = {
-        image: {},
-        products: [],
-    };
+        products: []
+    }
 
     componentDidMount() {
         fetch("http://localhost:3000/products")
@@ -14,27 +13,27 @@ class Home extends Component {
             });
     }
 
-    onChange = (e) => {
-        let name = e.target.name
-        this.setState({ [name]: e.target.value })
-    };
-
     onSubmit = (e) => {
         e.preventDefault();
-        const form = new FormData();
-        form.append("image", this.state.image);
+        const form = new FormData(document.querySelector('form'));
         fetch(`http://localhost:3000/products`, {
             method: "POST",
-            body: form,
+            body: form
         });
-    };
+    }
 
     render() {
         return (
             <div>
-                <form onSubmit={this.onSubmit}>
+                <form id="form" name="form" onSubmit={this.onSubmit}>
                     <label>Upload File</label>
-                    <input type="file" name="image" onChange={this.onChange} />
+                    <input type="file" id="image" name="image" />
+                    <br />
+                    <label>Description</label>
+                    <input type="text" id="description" name="description" />
+                    <br />
+                    <label>Price</label>
+                    <input type="text" id="price" name="price" />
                     <br />
                     <input type="submit" />
                 </form>
@@ -42,6 +41,8 @@ class Home extends Component {
                     {this.state.products.map((product) => (
                         <div key={product.id}>
                             <img src={product.image} alt="" />
+                            <p> {product.description}</p>
+                            <p> {product.price}</p>
                         </div>
                     ))}
                 </div>
