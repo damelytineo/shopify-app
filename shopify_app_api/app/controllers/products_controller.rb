@@ -4,11 +4,13 @@ class ProductsController < ApplicationController
         render json: Product.all
     end
 
-    # upload the actual image (request?)sent from the client to Cloudinary, 
-    # Once upload success, C. sends a response containing the URL strings of the image. What we store in our Rails database is not the actual image but the URL strings to where it is stored in Cloudinary.
+    def show
+        render json: @product
+    end
+
     def create 
         image = Cloudinary::Uploader.upload(params[:image])
-        @product = Product.create(image: image["url"])
+        @product = Product.create(image: image["url"], description: params[:description], price: params[:price] )
     end
 
 end
