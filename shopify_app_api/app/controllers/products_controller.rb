@@ -17,7 +17,7 @@ class ProductsController < ApplicationController
     def update
         product = Product.find_by(id: params[:id])
         if product.update(price: params[:price] )
-            render json: @product
+            render json: product
         end
     end
 

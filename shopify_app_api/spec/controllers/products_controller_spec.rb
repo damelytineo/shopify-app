@@ -19,7 +19,7 @@ RSpec.describe ProductsController, type: :request do
     end
 
     context 'POST #create' do
-        it 'creates a Product and returns it as JSON' do
+        it 'returns a success response' do
             # create file
             file = Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "ruby.png"), "image/jpg")
 
@@ -31,6 +31,23 @@ RSpec.describe ProductsController, type: :request do
             expect(JSON(response.body)["description"]).to eq("testing")
         end
     end
+
+    context 'PATCH #update' do
+        it 'returns a success response'  do
+            product = Product.create!(image: 'image', image_id: 'image_id', description: 'description', price: 1)
+            patch "/products/#{product.id}", :params => { :price => 100 }, :headers => headers
+            expect(response.content_type).to eq('application/json')
+            expect(JSON(response.body)["price"]).to eq("100.0")
+        end
+    end
+
+    context 'DELETE #destroy' do
+        it 'finds Product by ID, destroys it' do  
+            product = Product.create!(image: 'image', image_id: 'image_id', description: 'description', price: 1)
+            # stub call to Cloudinary
+            stub_request(:any, /api.cloudinary.com/).to_return(body: {}.to_json)
+            delete "/products/#{product.id}"
+            expect(Product.all.length).to eq(0)
+        end
+    end
 end
-
-
