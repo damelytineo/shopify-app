@@ -31,6 +31,13 @@ class Home extends Component {
         });
     }
 
+    onDelete = (e, id) => {
+        e.preventDefault();
+        fetch('http://localhost:3000/products/' + id, {
+            method: "DELETE"
+        });
+    }
+
     render() {
         return (
             <div>
@@ -47,14 +54,16 @@ class Home extends Component {
                         <br />
                         <input type="submit" />
                     </form>
+
                     {this.state.products.map((product) => (
-                        <form key={product.id} onSubmit={(e) => this.onUpdate(e, product.id)}>
+                        <form key={product.id} onSubmit={(e) => this.onUpdate(e, product.id)}  >
                             <img src={product.image} alt="" />
                             <p> {product.description}</p>
                             <label>Price</label>
                             <input type="text" id="price" name="price" defaultValue={product.price} />
                             <br />
                             <input type="submit" />
+                            <button onClick={(e) => this.onDelete(e, product.id)}>DELETE</button>
                         </form>
                     ))}
                 </div>

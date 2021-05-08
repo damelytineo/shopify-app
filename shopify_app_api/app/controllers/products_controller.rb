@@ -10,7 +10,8 @@ class ProductsController < ApplicationController
 
     def create 
         image = Cloudinary::Uploader.upload(params[:image])
-        product = Product.create(image: image["url"], description: params[:description], price: params[:price] )
+        product = Product.create(image: image["url"], image_id: image["public_id"], description: params[:description], price: params[:price] )
+        puts product
     end
 
     def update
@@ -18,6 +19,12 @@ class ProductsController < ApplicationController
         if product.update(price: params[:price] )
             render json: @product
         end
+    end
+
+    def destroy
+        product = Product.find_by(id: params[:id])
+        Cloudinary::Uploader.destroy(product.image_id, :invalidate => true) 
+        product.destroy
     end
 
 end
