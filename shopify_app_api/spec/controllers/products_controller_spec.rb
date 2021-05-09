@@ -24,7 +24,7 @@ RSpec.describe ProductsController, type: :request do
             file = Rack::Test::UploadedFile.new(Rails.root.join("spec", "fixtures", "ruby.png"), "image/jpg")
 
             # stub call to Cloudinary
-            stub_request(:any, /api.cloudinary.com/).to_return(body: { url: 'fake_url'}.to_json)
+            stub_request(:any, /api.cloudinary.com/).to_return(body: { url: 'fake_url', public_id: 'id'}.to_json)
             
             post "/products", :params => { :image => file, :description => 'testing', :price => 1 }, :headers => headers
             expect(response.content_type).to eq('application/json')

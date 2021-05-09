@@ -1,3 +1,7 @@
+This is a __ app built using Javascript and React on the front-end with a Ruby on Rails-built API back-end. The merchant uploads a product image, inputs a description and a price and clicks submit to post thier product. Product prices can be updated to reflect dicounts. 
+
+Cloudinary Account?
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
