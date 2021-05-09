@@ -2,15 +2,19 @@ import React, { Component } from "react";
 
 class Home extends Component {
     state = {
-        products: []
+        products: [],
     }
 
     componentDidMount() {
+        this.fetchProducts();
+    }
+
+    fetchProducts = () => {
         fetch("http://localhost:3000/products")
-            .then((response) => response.json())
-            .then((products) => {
-                this.setState({ products: products });
-            });
+        .then((response) => response.json())
+        .then((products) => {
+            this.setState({ products: products });
+        });
     }
 
     onCreate = (e) => {
@@ -19,6 +23,9 @@ class Home extends Component {
         fetch('http://localhost:3000/products', {
             method: "POST",
             body: form
+        })
+        .then((response) => {
+            this.fetchProducts();
         });
     }
 
@@ -28,6 +35,16 @@ class Home extends Component {
         fetch('http://localhost:3000/products/' + id, {
             method: "PATCH",
             body: form
+        })
+        .then((response) => {
+            if (response.ok) {
+                this.fetchProducts();
+            } else {
+                throw new Error('Invalid input');
+            }
+        })
+        .catch((error) => {
+            console.error(error); 
         });
     }
 
@@ -35,6 +52,9 @@ class Home extends Component {
         e.preventDefault();
         fetch('http://localhost:3000/products/' + id, {
             method: "DELETE"
+        })
+        .then((response) => {
+            this.fetchProducts();
         });
     }
 
