@@ -1,74 +1,56 @@
-This is a __ app built using Javascript and React on the front-end with a Ruby on Rails-built API back-end. The merchant uploads a product image, inputs a description and a price and clicks submit to post thier product. Product prices can be updated to reflect dicounts. 
+This is an image repository app built for merchants to update their inventory using Javascript and React on the front-end with a Ruby on Rails API back-end. The user uploads a product image, inputs a short description and a price for the product, and clicks submit to post their product. Product prices can be updated to reflect discounts or lower prices. Once a product is purchased, the merchant can remove the product from their listing.
 
-Cloudinary Account?
+Note: Images are uploaded using Cloudinary - a third-party cloud-based image and video management platform.  
 
-# Getting Started with Create React App
+## Prerequisites 
+Before you begin, Ensure you have ruby-2.6.3 and Node 8.16.0 or Node 10.16.0 or a later version installed.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Familiarize yourself with the following documentation and source code:
+* [Ruby on Rails Guides](https://guides.rubyonrails.org/)
+* [React Docs](https://reactjs.org/)
+* [React Source Code](https://github.com/facebook/react/tree/master/packages/react/src)
 
-## Available Scripts
+-- Important --
+ If you don’t already have one, please register for a free Cloudinary account here: https://cloudinary.com/. Once you sign up, your credentials/account details (including Cloud Name, API Key, API Secret) will be integrated into the Rails API. These can be found on the top left-hand corner of your dashboard. 
 
-In the project directory, you can run:
+Under config/initializers, create a new file named cloudinary.rb. In this file, replace values with your newly obtained Cloudinary credentials wrapped in a string. 
 
-### `yarn start`
+Cloudinary.config do |config|    
+   config.cloud_name = "cloud_name"   
+   config.api_key = "api_key"   
+   config.api_secret = "api_secret"   
+   config.secure = true    
+   config.cdn_subdomain = true  
+end
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+*If pushing code to GitHub, DO NOT forget to add this file to your ignore file! 
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Installing 
+To install, follow these steps:
 
-### `yarn test`
+Fork this repository onto your computer, then navigate into the project's directory, and run:
+- bundle install from within shopify_app_api to install all of the gems/dependencies found in the Gemfile, including Rails
+- npm install from within shopify_app-client to install all required dependencies for React
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## Using
+Follow these steps:
+- To start up the Rails server, make sure that you are in the root of the application in the terminal and run: rails s.
+- To start the local server, run npm start - If the browser doesn't open, but the server started correctly, you can use the local links that appear in the terminal to access the app in the browser.  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Contributing 
+To contribute, please see the [GitHub documentation](https://help.github.com/en/github/collaborating-with-issues-and-pull-requests/creating-a-pull-request) on creating a pull request.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `yarn eject`
+## License
+This code is available as open-source under the terms of the [MIT License](https://opensource.org/licenses/MIT). 
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Contact
+Please email Damely at damely.tineo07@gmail.com.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
